@@ -38,7 +38,7 @@ function interesSimple (capitalInicial,tasaNominalAnual,plazo){
 
 const capitalFinal = interesSimple(capitalInicial,tasaNominalAnual,plazo).toFixed(2)
 
-alert(nombre + ", muchas gracias por la información brindada. A continuación los resultados: \n\n" + "Capital Invertido: $" + capitalInicial + "\n" + "Tiempo: "+ plazo + " días" + "\n" +"Tasa Nominal Anual: "+ tasaNominalAnual + "%" + "\n" + "Capital final: $" + capitalFinal)
+alert(nombre + ", muchas gracias por la información brindada. A continuación los resultados: \n\n" + "Capital Invertido: $" + capitalInicial + "\n" + "Plazo: "+ plazo + " días" + "\n" +"Tasa Nominal Anual: "+ tasaNominalAnual + "%" + "\n" + "Capital final: $" + capitalFinal)
 
 
 
