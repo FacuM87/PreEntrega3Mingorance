@@ -4,7 +4,7 @@ alert ("Hola "+ nombre +"!" + " ¿Cómo estás?" +"\n \n" + "Hoy vamos a simular
 
 function ingreseCapitalInicial(){
     let capitalInicial=parseFloat(prompt("Comentanos, ¿cuanto dinero te gustaría invertir?"))
-    while (capitalInicial <=0) {
+    while (capitalInicial <=0 || isNaN(capitalInicial)) {
         capitalInicial=parseFloat(prompt("Ups! ingresaste un monto inválido, probemos de nuevo. ¿Cuanto dinero te gustaría invertir?"))   
     }
     return capitalInicial
@@ -12,7 +12,7 @@ function ingreseCapitalInicial(){
 
 function ingresePlazo(){
     let plazo=parseInt(prompt("¿Cuantos días quisieras dejar el capital invertido?"))
-    while (plazo <=0) {
+    while (plazo <=0 || isNaN(plazo)) {
         plazo=parseInt(prompt("Ups! ingresaste un carácter inválido, probemos de nuevo. ¿Cuantos días quisieras dejar el capital invertido?"))   
     }
     return plazo
