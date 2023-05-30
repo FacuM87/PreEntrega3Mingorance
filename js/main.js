@@ -1,41 +1,58 @@
 
-let nombre=prompt("Ingrese su nombre")
-alert ("Hola "+ nombre +"!" + " ¿Cómo estás?" +"\n \n" + "Hoy vamos a simular una inversión a plazo fijo para vos. Vamos a mostrarte cuanto obtendrías si realizaras la inversión en el plazo que tu indiques y la tasa de interés obtenida según el monto depositado. Para lo cual necesitamos solicitarte cierta información -->")
-
-function ingreseCapitalInicial(){
-    let capitalInicial=parseFloat(prompt("Comentanos, ¿cuanto dinero te gustaría invertir?"))
-    while (capitalInicial <=0 || isNaN(capitalInicial)) {
-        capitalInicial=parseFloat(prompt("Ups! ingresaste un monto inválido, probemos de nuevo. ¿Cuanto dinero te gustaría invertir?"))   
+class Inversion {
+    constructor(nombre) {
+      this.nombre = nombre
+      this.capitalInicial = 0
+      this.plazo = 0
+      this.tasaNominalAnual = 0
+      this.capitalFinal = 0
     }
-    return capitalInicial
-}
-
-function ingresePlazo(){
-    let plazo=parseInt(prompt("¿Cuantos días quisieras dejar el capital invertido?"))
-    while (plazo <=0 || isNaN(plazo)) {
-        plazo=parseInt(prompt("Ups! ingresaste un carácter inválido, probemos de nuevo. ¿Cuantos días quisieras dejar el capital invertido?"))   
+  
+    ingresarCapitalInicial() {
+      let capitalInicial = parseFloat(prompt("Comentanos, ¿cuánto dinero te gustaría invertir?"))
+      while (capitalInicial <= 0 || isNaN(capitalInicial)) {
+        capitalInicial = parseFloat(prompt("¡Ups! Ingresaste un monto inválido, probemos de nuevo. ¿Cuánto dinero te gustaría invertir?"))
+      }
+      this.capitalInicial = capitalInicial
     }
-    return plazo
-}
+  
+    ingresarPlazo() {
+      let plazo = parseInt(prompt("¿Cuántos días quisieras dejar el capital invertido?"));
+      while (plazo <= 0 || isNaN(plazo)) {
+        plazo = parseInt(prompt("¡Ups! Ingresaste un carácter inválido, probemos de nuevo. ¿Cuántos días quisieras dejar el capital invertido?"))
+      }
+      this.plazo = plazo
+    }
+  
+    determinarTasaNominalAnual() {
+      if (this.capitalInicial > 0 && this.capitalInicial < 500000) {
+        this.tasaNominalAnual = 90
+      } else if (this.capitalInicial >= 500000 && this.capitalInicial < 1000000) {
+        this.tasaNominalAnual = 100
+      } else if (this.capitalInicial >= 1000000) {
+        this.tasaNominalAnual = 110
+      }
+    }
+  
+    calcularInteresSimple() {
+      let interesPeriodo = this.capitalInicial * (this.tasaNominalAnual / 100) * (this.plazo / 365);
+      this.capitalFinal = parseFloat(this.capitalInicial + interesPeriodo)
+    }
+  
+    mostrarResultados() {
+      alert(this.nombre + ", muchas gracias por la información brindada. A continuación los resultados: \n\n" +"Capital Invertido: $" + this.capitalInicial + "\n" + "Plazo: " + this.plazo + " días" + "\n" + "Tasa Nominal Anual: " + this.tasaNominalAnual + "%" + "\n" + "Capital final: $" + this.capitalFinal.toFixed(2))
+    }
+  }
+  
+const inversiones = []
 
-const plazo=ingresePlazo()
-const capitalInicial=ingreseCapitalInicial()
+    let nombre = prompt("Ingrese su nombre")
+    const inversion = new Inversion(nombre)
+    inversion.ingresarCapitalInicial()
+    inversion.ingresarPlazo()
+    inversion.determinarTasaNominalAnual()
+    inversion.calcularInteresSimple()
+    inversion.mostrarResultados()
+    inversiones.push(inversion)
 
-let tasaNominalAnual
-if ((capitalInicial>0) && (capitalInicial<500000)) {
-    tasaNominalAnual=90
-} else if ((capitalInicial>=500000) && (capitalInicial<1000000)){
-    tasaNominalAnual=100
-} else if (capitalInicial>=1000000) {
-    tasaNominalAnual=110
-}
-
-function interesSimple (capitalInicial,tasaNominalAnual,plazo){
-    let interesPeriodo = capitalInicial * (tasaNominalAnual/100)*(plazo/365)
-    let capitalFinal = parseFloat(capitalInicial + interesPeriodo)
-    return capitalFinal
-}
-
-const capitalFinal = interesSimple(capitalInicial,tasaNominalAnual,plazo).toFixed(2)
-
-alert(nombre + ", muchas gracias por la información brindada. A continuación los resultados: \n\n" + "Capital Invertido: $" + capitalInicial + "\n" + "Plazo: "+ plazo + " días" + "\n" +"Tasa Nominal Anual: "+ tasaNominalAnual + "%" + "\n" + "Capital final: $" + capitalFinal)
+console.log(inversiones)
