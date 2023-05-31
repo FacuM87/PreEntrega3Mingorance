@@ -1,3 +1,6 @@
+
+alert("Bienvenido/a a la versión mejorada del simulador de inversiones a plazo fijo! \n\nTras las mejoras incorporadas podrás realizar no solo una simulación, sino todas las que desees. Los resultados quedarán almacenados y luego podrás acceder a los mismos ya sea buscando por nombre o plazo. \n\nComencemos!")
+
 // Seteo de Clase 
 
 class Inversion {
