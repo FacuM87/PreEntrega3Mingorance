@@ -65,7 +65,7 @@ function simularInversion(){
 
 console.log(inversiones)
 
-// Funciones de filtro y búsqueda         ------------- ¿ESTÁN BIEN FORMULADAS? -------------
+// Funciones de filtro y búsqueda 
 
 function buscarPorNombre(nombre) {
   return inversiones.find((inversion) => inversion.nombre.toLowerCase() === nombre.toLowerCase())
@@ -88,9 +88,9 @@ function Menu() {
     case 2:
       let nombreBusqueda = prompt("Ingrese nombre para la búsqueda")
       let inversionEncontrada = buscarPorNombre(nombreBusqueda)
-      console.log(inversionEncontrada)
-      if (inversionEncontrada.length > 0) {
-        alert(inversionEncontrada) // --> ¿POR QUE NO MUESTRA EN EL ALERT EL EL ARRAY ENCONTRADO?
+      if (inversionEncontrada) {
+        let mensaje= `Nombre: ${inversionEncontrada.nombre} \nCapital Inicial: $${inversionEncontrada.capitalInicial} \nPlazo: ${inversionEncontrada.plazo} \nTNA: ${inversionEncontrada.tasaNominalAnual}% \nCapital Final: $${inversionEncontrada.capitalFinal.toFixed(2)}`
+        alert(mensaje)
       } else {
         alert("No se encontraron inversiones con el nombre indicado.")
       }
@@ -101,7 +101,10 @@ function Menu() {
       let inversionesFiltradas = filtrarPorPlazo(plazoBusqueda)
       console.log(inversionesFiltradas)
       if (inversionesFiltradas.length > 0) {
-        alert("Inversión o inversiones encontradas:\n\n" + inversionesFiltradas) // --> ¿POR QUE NO MUESTRA EN EL ALERT EL ARRAY ENCONTRADO?
+        
+        //---- CÓDIGO A EJECUTAR PARA RECIBIR EL LISTADO DE INVERISONES FILTRADAS (en formato "propiedad:valor") PARA MOSTRAR DESPUÉS EN EL ALERT
+
+        alert() 
       } else {
         alert("No se encontraron inversiones con el plazo indicado.")
       }
