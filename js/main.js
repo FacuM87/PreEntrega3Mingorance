@@ -30,11 +30,11 @@ class Inversion {
 
   determinarTasaNominalAnual() {
     if (this.capitalInicial > 0 && this.capitalInicial < 500000) {
-      this.tasaNominalAnual = 90
+      this.tasaNominalAnual = 97
     } else if (this.capitalInicial >= 500000 && this.capitalInicial < 1000000) {
-      this.tasaNominalAnual = 100
+      this.tasaNominalAnual = 107
     } else if (this.capitalInicial >= 1000000) {
-      this.tasaNominalAnual = 110
+      this.tasaNominalAnual = 117
     }
   }
 
@@ -65,7 +65,7 @@ function simularInversion(){
 
 console.log(inversiones)
 
-// Funciones de filtro y búsqueda         ------------- VERIFICAR QUE ESTÉN BIEN -------------
+// Funciones de filtro y búsqueda         ------------- ¿ESTÁN BIEN FORMULADAS? -------------
 
 function buscarPorNombre(nombre) {
   return inversiones.find((inversion) => inversion.nombre.toLowerCase() === nombre.toLowerCase())
@@ -88,8 +88,9 @@ function Menu() {
     case 2:
       let nombreBusqueda = prompt("Ingrese nombre para la búsqueda")
       let inversionEncontrada = buscarPorNombre(nombreBusqueda)
+      console.log(inversionEncontrada)
       if (inversionEncontrada.length > 0) {
-        alert("Inversión encontrada:\n\n" + inversionEncontrada) // --> ¿COMO MOSTRAR EN EL ALERT EL ARRAY ENCONTRADO?
+        alert(inversionEncontrada) // --> ¿POR QUE NO MUESTRA EN EL ALERT EL EL ARRAY ENCONTRADO?
       } else {
         alert("No se encontraron inversiones con el nombre indicado.")
       }
@@ -98,8 +99,9 @@ function Menu() {
     case 3:
       let plazoBusqueda = parseInt(prompt("Ingrese el plazo para la búsqueda"))
       let inversionesFiltradas = filtrarPorPlazo(plazoBusqueda)
+      console.log(inversionesFiltradas)
       if (inversionesFiltradas.length > 0) {
-        alert("Inversión o inversiones encontradas:\n\n" + inversionesFiltradas) // --> ¿COMO MOSTRAR EN EL ALERT EL O LOS ARRAYS ENCONTRADOS?
+        alert("Inversión o inversiones encontradas:\n\n" + inversionesFiltradas) // --> ¿POR QUE NO MUESTRA EN EL ALERT EL ARRAY ENCONTRADO?
       } else {
         alert("No se encontraron inversiones con el plazo indicado.")
       }
