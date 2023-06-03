@@ -99,12 +99,12 @@ function Menu() {
     case 3:
       let plazoBusqueda = parseInt(prompt("Ingrese el plazo para la búsqueda"))
       let inversionesFiltradas = filtrarPorPlazo(plazoBusqueda)
-      console.log(inversionesFiltradas)
       if (inversionesFiltradas.length > 0) {
-        
-        //---- CÓDIGO A EJECUTAR PARA RECIBIR EL LISTADO DE INVERISONES FILTRADAS (en formato "propiedad:valor") PARA MOSTRAR DESPUÉS EN EL ALERT
-
-        alert() 
+        let listado = "Inversiones Encontradas: \n\n"
+        inversionesFiltradas.forEach(item => {
+          listado += `Nombre: ${item.nombre} \nCapital Inicial: $${item.capitalInicial}\nPlazo: ${item.plazo} días \nTNA: ${item.tasaNominalAnual}% \nCapital Final: $${item.capitalFinal.toFixed(2)}\n\n` 
+      })
+        alert(listado) 
       } else {
         alert("No se encontraron inversiones con el plazo indicado.")
       }
@@ -114,7 +114,7 @@ function Menu() {
       alert("\nGracias por elegirnos! \nTe esperamos nuevamente! :) \n\nSaludos!")
       break
     default:
-      alert("Opción inválida :( \n\n¿Probamos de nuevo?")
+      alert("Ingresaste una opción inválida :( \n\n Probemos de nuevo!")
       Menu()
   }
 }
