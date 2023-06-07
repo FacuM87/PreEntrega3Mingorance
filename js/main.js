@@ -77,13 +77,13 @@ function filtrarPorPlazo(plazo) {
 
 // Menú
 
-function Menu() {
+function menu() {
   let opciones = parseInt(prompt("\n¿Qué acción desea realizar?: \n\n1. Simular una inversión\n2. Buscar inversiones por nombre\n3. Buscar inversiones por plazo\n4. Salir \n"));
 
   switch (opciones) {
     case 1:
       simularInversion()
-      Menu()
+      menu()
       break
     case 2:
       let nombreBusqueda = prompt("Ingrese nombre para la búsqueda")
@@ -94,7 +94,7 @@ function Menu() {
       } else {
         alert("No se encontraron inversiones con el nombre indicado.")
       }
-      Menu()
+      menu()
       break
     case 3:
       let plazoBusqueda = parseInt(prompt("Ingrese el plazo para la búsqueda"))
@@ -108,15 +108,15 @@ function Menu() {
       } else {
         alert("No se encontraron inversiones con el plazo indicado.")
       }
-      Menu()
+      menu()
       break
     case 4:
       alert("\nGracias por elegirnos! \nTe esperamos nuevamente! :) \n\nSaludos!")
       break
     default:
       alert("Ingresaste una opción inválida :( \n\n Probemos de nuevo!")
-      Menu()
+      menu()
   }
 }
 
-Menu()
+menu()
