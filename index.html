@@ -5,10 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Simulador de Inversiones</title>
 </head>
 <body>
-    
+    <h1 class="text-center mt-5"> Simulador de Inversiones </h1>
+    <form id="form">
+        <div class="d-flex flex-column">
+            <label for=""> Nombre: </label>
+            <input id="nombre" class="mb-3" type="nombre" required placeholder="Ingrese su Nombre">
+            <div id="nombreError" class="form-text"></div>
+            <label for=""> Monto a Invertir: </label>
+            <input id="capitalInicial" class="mb-3" type="number" required placeholder="Ingrese el monto">
+            <div id="montoError" class="form-text"></div>
+            <label for=""> Plazo en días: </label>
+            <input id="plazo" type="number" required placeholder="Ingrese el plazo">
+            <div id="plazoError" class="form-text"></div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button id="btn" class="btn btn-primary mt-4">Simular Inversión</button>
+        </div>
+    </form>
+
+    <h2 class="text-center mt-5"> Búsqueda de Inversiones </h2>
+        <div class="busquedas d-flex">
+            <div class="d-flex flex-column">
+                <label for=""> Por nombre: </label>
+                <input id="nombre" class="" type="nombre" required placeholder="Ingrese el Nombre">
+                <button class="btn btn-primary mt-4"> Buscar por nombre </button> 
+                <div id="busquedaNombreError" class="form-text"></div>
+            </div>
+            <div class="d-flex flex-column">
+                <label for="" class=""> Por plazo (en días): </label>
+                <input id="plazo" type="number" required placeholder="Ingrese el plazo">
+                <button class="btn btn-primary mt-4"> Buscar por Plazo </button>
+                <div id="busquedaPlazoError" class="form-text"></div>
+            </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
