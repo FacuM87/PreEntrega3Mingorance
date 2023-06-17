@@ -12,30 +12,15 @@ class Inversion {
   }
 
   validarNombre(nombre){
-    if (nombre!="") {
-      nombreError.innerHTML = ""
-      this.nombre=nombre
-    } else {
-      nombreError.innerHTML = "Completa este campo"
-    }
+    nombre != 0 ? (nombreError.innerHTML = "", this.nombre=nombre) : (nombreError.innerHTML = "Completa este campo")
   }
 
-  validarCapitalInicial(capitalInicial) { 
-    if (capitalInicial>0) {
-      montoError.innerHTML = ""
-      this.capitalInicial=capitalInicial  
-    } else {
-      montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?"
-    }
+  validarCapitalInicial(capitalInicial) {
+    capitalInicial > 0 ? (montoError.innerHTML = "", this.capitalInicial = capitalInicial) : (montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?")
   }
   
   validarPlazo(plazo) {
-    if (plazo>0) {
-      plazoError.innerHTML = ""
-      this.plazo=parseInt(plazo)  
-    } else {
-      plazoError.innerHTML = "¡Ups! Plazo inválido, ¿probamos de nuevo?"
-    }
+    plazo > 0 ? (plazoError.innerHTML = "", this.plazo=parseInt(plazo)) : (plazoError.innerHTML = "¡Ups! Plazo inválido, ¿probamos de nuevo?")
   }
 
   determinarTasaNominalAnual() {
@@ -56,15 +41,13 @@ class Inversion {
   mostrarResultados() {
     const section1 = document.getElementById("section1")
     const div = document.getElementById("resultados")
-    if (div && div.parentNode === section1) {
-      section1.removeChild(div)
-    }
+    div && div.parentNode === section1 && section1.removeChild(div)
     const divResultados = document.createElement("div")
     divResultados.id="resultados"
     divResultados.className="resultados"    
     section1.appendChild(divResultados)
       divResultados.innerHTML = `<div>
-        <p>${this.nombre}, muchas gracias por la información brindada. A continuación los resultados:</p>
+        <p class="text-center">${this.nombre}, muchas gracias por la información brindada. A continuación los resultados:</p>
         <ul class="listaResultados">
           <li>Capital Invertido: $${this.capitalInicial}</li>
           <li>Plazo: ${this.plazo} días</li>
@@ -86,11 +69,12 @@ function simularInversion(nombre, capitalInicial, plazo){
   inversion.validarPlazo(plazo)
   inversion.determinarTasaNominalAnual()
   inversion.calcularInteresSimple()
-  inversion.mostrarResultados()
-  
+  capitalInicial > 0 && plazo > 0 && nombre !== "" && (inversion.mostrarResultados(), inversiones.push(inversion))
+  /*
   if (capitalInicial>0 && plazo>0 && nombre!="") {
+    inversion.mostrarResultados()
     inversiones.push(inversion)
-  }
+  }*/
   console.log(inversiones)
 }
 
@@ -109,12 +93,15 @@ boton.addEventListener("click", (event) => {
 
 })
 
+/*
 let resetBtn=document.getElementById("resetResultados")
 resetBtn.addEventListener("click", () => {
   let form = document.getElementById("form")
   form.reset()
 })
+*/
 
+/*
 
 function traerInversionesDelLS() {
   const inversionesEnLS = localStorage.getItem("inversiones")
@@ -123,17 +110,21 @@ function traerInversionesDelLS() {
   }
 }
 
-/*
 // Funciones de filtro y búsqueda 
 
 function buscarPorNombre(nombre) {
+  traerInversionesDelLS()
   return inversiones.find((inversion) => inversion.nombre.toLowerCase() === nombre.toLowerCase())
 }
 
 function filtrarPorPlazo(plazo) {
+  traerInversionesDelLS()
   return inversiones.filter((inversion) => inversion.plazo === plazo)
 }
 
+*/
+
+/*
 // Menú
 
 function menu() {
