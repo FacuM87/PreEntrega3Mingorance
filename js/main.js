@@ -13,6 +13,7 @@ class Inversion {
 
   validarNombre(nombre){
     if (nombre!="") {
+      nombreError.innerHTML = ""
       this.nombre=nombre
     } else {
       nombreError.innerHTML = "Completa este campo"
@@ -21,6 +22,7 @@ class Inversion {
 
   validarCapitalInicial(capitalInicial) { 
     if (capitalInicial>0) {
+      montoError.innerHTML = ""
       this.capitalInicial=capitalInicial  
     } else {
       montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?"
@@ -29,6 +31,7 @@ class Inversion {
   
   validarPlazo(plazo) {
     if (plazo>0) {
+      plazoError.innerHTML = ""
       this.plazo=parseInt(plazo)  
     } else {
       plazoError.innerHTML = "¡Ups! Plazo inválido, ¿probamos de nuevo?"
@@ -46,21 +49,29 @@ class Inversion {
   }
 
   calcularInteresSimple() {
-    let interesPeriodo = this.capitalInicial * (this.tasaNominalAnual / 100) * (this.plazo / 365);
+    const interesPeriodo = this.capitalInicial * (this.tasaNominalAnual / 100) * (this.plazo / 365);
     this.capitalFinal = parseFloat(this.capitalInicial + interesPeriodo)
   }
 
   mostrarResultados() {
-    const resultadosDiv = document.getElementById("resultados")
-    resultadosDiv.innerHTML = `
-      <p>${this.nombre}, muchas gracias por la información brindada. A continuación los resultados:</p>
-      <ul>
-        <li>Capital Invertido: $${this.capitalInicial}</li>
-        <li>Plazo: ${this.plazo} días</li>
-        <li>Tasa Nominal Anual: ${this.tasaNominalAnual}%</li>
-        <li>Capital final: $${this.capitalFinal.toFixed(2)}</li>
-      </ul>
-    `
+    const section1 = document.getElementById("section1")
+    const div = document.getElementById("resultados")
+    if (div && div.parentNode === section1) {
+      section1.removeChild(div)
+    }
+    const divResultados = document.createElement("div")
+    divResultados.id="resultados"
+    divResultados.className="resultados"    
+    section1.appendChild(divResultados)
+      divResultados.innerHTML = `<div>
+        <p>${this.nombre}, muchas gracias por la información brindada. A continuación los resultados:</p>
+        <ul class="listaResultados">
+          <li>Capital Invertido: $${this.capitalInicial}</li>
+          <li>Plazo: ${this.plazo} días</li>
+          <li>Tasa Nominal Anual: ${this.tasaNominalAnual}%</li>
+          <li>Capital final: $${this.capitalFinal.toFixed(2)}</li>
+        </ul>
+        </div>`
   }
 }
 
@@ -84,7 +95,7 @@ function simularInversion(nombre, capitalInicial, plazo){
 }
 
 function cargarInversionesEnLS() {
-  localStorage.setItem('inversiones', JSON.stringify(inversiones));
+  localStorage.setItem("inversiones", JSON.stringify(inversiones));
 }
 
 let boton=document.getElementById("simularInversion")
@@ -95,7 +106,22 @@ boton.addEventListener("click", (event) => {
   let plazo = parseInt(document.getElementById("plazo").value)
   simularInversion(nombre, capitalInicial, plazo)
   cargarInversionesEnLS()
+
 })
+
+let resetBtn=document.getElementById("resetResultados")
+resetBtn.addEventListener("click", () => {
+  let form = document.getElementById("form")
+  form.reset()
+})
+
+
+function traerInversionesDelLS() {
+  const inversionesEnLS = localStorage.getItem("inversiones")
+  if (inversionesEnLS) {
+    inversiones = JSON.parse(inversionesEnLS)
+  }
+}
 
 /*
 // Funciones de filtro y búsqueda 
