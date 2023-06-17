@@ -11,18 +11,28 @@ class Inversion {
     this.capitalFinal = 0
   }
 
-  ingresarCapitalInicial(capitalInicial) {
-    while (capitalInicial <= 0 || isNaN(capitalInicial)) {
-      capitalInicial = parseFloat(prompt("¡Ups! Ingresaste un monto inválido, probemos de nuevo. ¿Cuánto dinero te gustaría invertir?"))
+  validarNombre(nombre){
+    if (nombre!="") {
+      this.nombre=nombre
+    } else {
+      nombreError.innerHTML = "Completa este campo"
     }
-    this.capitalInicial = capitalInicial
   }
 
-  ingresarPlazo(plazo) {
-    while (plazo <= 0 || isNaN(plazo)) {
-      plazo = parseInt(prompt("¡Ups! Ingresaste un carácter inválido, probemos de nuevo. ¿Cuántos días quisieras dejar el capital invertido?"))
+  validarCapitalInicial(capitalInicial) { 
+    if (capitalInicial>0) {
+      this.capitalInicial=capitalInicial  
+    } else {
+      montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?"
     }
-    this.plazo = plazo
+  }
+  
+  validarPlazo(plazo) {
+    if (plazo>0) {
+      this.plazo=parseInt(plazo)  
+    } else {
+      plazoError.innerHTML = "¡Ups! Plazo inválido, ¿probamos de nuevo?"
+    }
   }
 
   determinarTasaNominalAnual() {
@@ -41,7 +51,16 @@ class Inversion {
   }
 
   mostrarResultados() {
-    alert(this.nombre + ", muchas gracias por la información brindada. A continuación los resultados: \n\n" +"Capital Invertido: $" + this.capitalInicial + "\n" + "Plazo: " + this.plazo + " días" + "\n" + "Tasa Nominal Anual: " + this.tasaNominalAnual + "%" + "\n" + "Capital final: $" + this.capitalFinal.toFixed(2))
+    const resultadosDiv = document.getElementById("resultados")
+    resultadosDiv.innerHTML = `
+      <p>${this.nombre}, muchas gracias por la información brindada. A continuación los resultados:</p>
+      <ul>
+        <li>Capital Invertido: $${this.capitalInicial}</li>
+        <li>Plazo: ${this.plazo} días</li>
+        <li>Tasa Nominal Anual: ${this.tasaNominalAnual}%</li>
+        <li>Capital final: $${this.capitalFinal.toFixed(2)}</li>
+      </ul>
+    `
   }
 }
 
@@ -51,22 +70,31 @@ const inversiones = []
 
 function simularInversion(nombre, capitalInicial, plazo){ 
   const inversion = new Inversion(nombre)
-  inversion.ingresarCapitalInicial(capitalInicial)
-  inversion.ingresarPlazo(plazo)
-  inversion.determinarTasaNominalAnual(capitalInicial)
-  inversion.calcularInteresSimple(capitalInicial, plazo)
-  /*inversion.mostrarResultados()*/
-  inversiones.push(inversion)
+  inversion.validarNombre(nombre)
+  inversion.validarCapitalInicial(capitalInicial)
+  inversion.validarPlazo(plazo)
+  inversion.determinarTasaNominalAnual()
+  inversion.calcularInteresSimple()
+  inversion.mostrarResultados()
+  
+  if (capitalInicial>0 && plazo>0 && nombre!="") {
+    inversiones.push(inversion)
+  }
   console.log(inversiones)
 }
 
-let boton=document.getElementById("btn")
+function cargarInversionesEnLS() {
+  localStorage.setItem('inversiones', JSON.stringify(inversiones));
+}
+
+let boton=document.getElementById("simularInversion")
 boton.addEventListener("click", (event) => {
   event.preventDefault()
   let nombre = document.getElementById("nombre").value
   let capitalInicial = parseFloat(document.getElementById("capitalInicial").value)
   let plazo = parseInt(document.getElementById("plazo").value)
   simularInversion(nombre, capitalInicial, plazo)
+  cargarInversionesEnLS()
 })
 
 /*
