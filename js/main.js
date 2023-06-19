@@ -14,6 +14,13 @@ class Inversion {
   validarNombre(nombre){
     let nombreError=document.getElementById("nombreError")
     nombre !== "" ? (nombreError.innerHTML = "") : (nombreError.innerHTML = "Completa este campo")
+    
+    let inversionExistente = inversiones.find(inversion => inversion.nombre.toLowerCase() === nombre.toLowerCase())
+    inversionExistente && (nombreError.innerHTML = "Favor de ingresar un nombre no ingresado anteriormente.") 
+
+    if (nombre === "" || inversionExistente) {
+      return false
+    }
   }
 
   validarCapitalInicial(capitalInicial) {
@@ -46,7 +53,7 @@ class Inversion {
     const sectionSim = document.getElementById("sectionSim")
     const divResultados = document.createElement("div")
     divResultados.id="resultados"
-    divResultados.className="cajaResultados"    
+    divResultados.classList.add("cajaResultados")    
     sectionSim.appendChild(divResultados)
     divResultados.innerHTML = `
       <div>
@@ -79,7 +86,7 @@ function simularInversion(nombre, capitalInicial, plazo){
   inversion.validarPlazo(plazo)
   inversion.determinarTasaNominalAnual()
   inversion.calcularInteresSimple()
-  if (capitalInicial > 0 && plazo > 0 && nombre !== "") {
+  if (capitalInicial > 0 && plazo > 0 && inversion.validarNombre(nombre)!=false) {
     inversion.mostrarResultados() 
     inversiones.push(inversion) 
     guardarInversionesEnLS() 
@@ -127,7 +134,7 @@ function mostrarResultadoBusqueda(resultado){
   const sectionBus=document.getElementById("sectionBus")
   const divResultadosBus = document.createElement("div")
   divResultadosBus.id="resultadosBus"
-  divResultadosBus.className="cajaResultadosBus"    
+  divResultadosBus.classList.add("cajaResultadosBus")    
   sectionBus.appendChild(divResultadosBus)
   divResultadosBus.innerHTML = `
     <p class="text-center">Resultado de la búsqueda:</p>
@@ -138,7 +145,10 @@ function mostrarResultadoBusqueda(resultado){
       <li>Tasa Nominal Anual: ${resultado.tasaNominalAnual}%</li>
       <li>Capital final: $${resultado.capitalFinal.toFixed(2)}</li>
     </ul>
+    <button id="btnEliminarInversion" class="btn btn-primary mt-4">Eliminar inversión del registro</button> 
     `
+  let btnEliminacionRegistro=document.getElementById("btnEliminarInversion")
+  btnEliminacionRegistro.addEventListener("click", eliminarInversion)
 }
 
 function validarNombreBus(buscarNombre){
@@ -158,9 +168,34 @@ function buscarPorNombre() {
 let btnBusqueda=document.getElementById("btnBusquedaNombre")
 btnBusqueda.addEventListener("click", buscarPorNombre)
 
+function eliminarInversion(){ 
+  let nombreInversion = document.getElementById("buscarNombre").value
+  let index = inversiones.indexOf(inversion => inversion.nombre === nombreInversion)
+  inversiones.splice(index, 1)
+  guardarInversionesEnLS()  
+}
 
+function resumenSimulaciones(){
+  let inversionesResumen=traerInversionesDelLS()
+  contenido=""
+  inversionesResumen.forEach(inversion => {
+    contenido+= `
+      <div class="cajaResultadosBus">
+        <p class="text-center">Simulación de ${inversion.nombre}</p>
+        <ul class="listaResultados">
+          <li>Capital Inicial: $${inversion.capitalInicial}</li>
+          <li>Plazo: ${inversion.plazo} días</li>
+          <li>Tasa Nominal Anual: ${inversion.tasaNominalAnual}%</li>
+          <li>Capital final: $${inversion.capitalFinal.toFixed(2)}</li>
+        </ul>
+      </div>
+    `
+  })
+  document.getElementById("resumenSimulaciones").innerHTML=contenido
+}
 
-
+let btnResumen=document.getElementById("resumen")
+btnResumen.addEventListener("click", resumenSimulaciones)
 
 
 

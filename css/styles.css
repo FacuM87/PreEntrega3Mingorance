@@ -11,6 +11,7 @@ form{
     height: fit-content;
     border-radius: 10px;
     padding: 30px;
+    z-index: 10;
 }
 
 input{
@@ -27,6 +28,7 @@ input{
     border-radius: 10px;
     padding: 30px;
     gap: 30px;
+    z-index: 10;
 }
 
 .cajaResultados{
@@ -39,6 +41,7 @@ input{
     align-items: center;
     padding: 20px;
     margin: 10px;
+    animation: SlideIn .5s ease-out
 }
 
 .listaResultados{
@@ -62,6 +65,16 @@ input{
     width: fit-content;
     height: fit-content; 
     margin: 10px;
+    animation: SlideIn .5s ease-out
+}
+
+@keyframes SlideIn {
+    0%{
+        transform: translateY(-195px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }
 
 .btnResumen {
