@@ -38,7 +38,7 @@ input{
     border-radius: 10px;
     align-items: center;
     padding: 20px;
-    margin-right: 30px;
+    margin: 10px;
 }
 
 .listaResultados{
@@ -51,10 +51,25 @@ input{
     gap: 10px;
 }
 
+.btn{
+    cursor: pointer;
+}
+
 .cajaResultadosBus{
     background-color:lightsteelblue;
     border-radius: 10px;
     padding: 20px;
     width: fit-content;
     height: fit-content; 
+    margin: 10px;
+}
+
+.btnResumen {
+    margin: 0 auto;
+}
+
+.titulo {
+    background-color: darkslategray;
+    color: white;
+    padding: 20px;
 }
