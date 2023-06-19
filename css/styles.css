@@ -5,13 +5,12 @@
 }
 
 form{
-    margin: 40px auto;
+    margin: 10px;
     background-color: lightgrey;
     width: fit-content;
     height: fit-content;
     border-radius: 10px;
     padding: 30px;
-
 }
 
 input{
@@ -21,7 +20,7 @@ input{
 }
 
 .busquedas{
-    margin: 40px auto;
+    margin: 10px;
     background-color: lightgrey;
     width: fit-content;
     height: fit-content;
@@ -30,11 +29,11 @@ input{
     gap: 30px;
 }
 
-.resultados{
+.cajaResultados{
     display: flex;
     align-self: center;
-    width: 300px;
-    height: 223px;
+    width: fit-content;
+    height: fit-content;
     background-color:lightsteelblue;
     border-radius: 10px;
     align-items: center;
@@ -44,10 +43,18 @@ input{
 
 .listaResultados{
     list-style-type: none;
-    margin-bottom: 0px ;
+    margin: 0 auto;
+    padding: 10px;
 }
 
 .btns{
     gap: 10px;
 }
 
+.cajaResultadosBus{
+    background-color:lightsteelblue;
+    border-radius: 10px;
+    padding: 20px;
+    width: fit-content;
+    height: fit-content; 
+}

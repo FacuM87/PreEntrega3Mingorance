@@ -12,14 +12,17 @@ class Inversion {
   }
 
   validarNombre(nombre){
-    nombre != 0 ? (nombreError.innerHTML = "", this.nombre=nombre) : (nombreError.innerHTML = "Completa este campo")
+    let nombreError=document.getElementById("nombreError")
+    nombre !== "" ? (nombreError.innerHTML = "") : (nombreError.innerHTML = "Completa este campo")
   }
 
   validarCapitalInicial(capitalInicial) {
+    let montoError=document.getElementById("montoError")
     capitalInicial > 0 ? (montoError.innerHTML = "", this.capitalInicial = capitalInicial) : (montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?")
   }
   
   validarPlazo(plazo) {
+    let plazoError=document.getElementById("plazoError")
     plazo > 0 ? (plazoError.innerHTML = "", this.plazo=parseInt(plazo)) : (plazoError.innerHTML = "¡Ups! Plazo inválido, ¿probamos de nuevo?")
   }
 
@@ -39,26 +42,33 @@ class Inversion {
   }
 
   mostrarResultados() {
-    const section1 = document.getElementById("section1")
-    const div = document.getElementById("resultados")
-    div && div.parentNode === section1 && section1.removeChild(div)
+    limpiarResultadoAnterior("sectionSim","resultados")
+    const sectionSim = document.getElementById("sectionSim")
     const divResultados = document.createElement("div")
     divResultados.id="resultados"
-    divResultados.className="resultados"    
-    section1.appendChild(divResultados)
-      divResultados.innerHTML = `<div>
-        <p class="text-center">${this.nombre}, muchas gracias por la información brindada. A continuación los resultados:</p>
+    divResultados.className="cajaResultados"    
+    sectionSim.appendChild(divResultados)
+    divResultados.innerHTML = `
+      <div>
+        <p class="text-center mb-2">Muchas gracias ${this.nombre}. <br> A continuación los resultados:</p>
         <ul class="listaResultados">
           <li>Capital Invertido: $${this.capitalInicial}</li>
           <li>Plazo: ${this.plazo} días</li>
           <li>Tasa Nominal Anual: ${this.tasaNominalAnual}%</li>
           <li>Capital final: $${this.capitalFinal.toFixed(2)}</li>
         </ul>
-        </div>`
+      </div>
+    `
   }
 }
 
-// Array de almacenamiento de objetos (inversiones), ejecución de los métodos y salida del array por consola 
+function limpiarResultadoAnterior(idSection, idDiv){
+  const section = document.getElementById(idSection)
+  const div = document.getElementById(idDiv)
+  if (div && (div.parentNode === section)) {
+    section.removeChild(div)
+  }  
+}
 
 const inversiones = []
 
@@ -69,18 +79,34 @@ function simularInversion(nombre, capitalInicial, plazo){
   inversion.validarPlazo(plazo)
   inversion.determinarTasaNominalAnual()
   inversion.calcularInteresSimple()
-  capitalInicial > 0 && plazo > 0 && nombre !== "" && (inversion.mostrarResultados(), inversiones.push(inversion))
-  /*
-  if (capitalInicial>0 && plazo>0 && nombre!="") {
-    inversion.mostrarResultados()
-    inversiones.push(inversion)
-  }*/
+  if (capitalInicial > 0 && plazo > 0 && nombre !== "") {
+    inversion.mostrarResultados() 
+    inversiones.push(inversion) 
+    guardarInversionesEnLS() 
+  }
   console.log(inversiones)
 }
 
-function cargarInversionesEnLS() {
-  localStorage.setItem("inversiones", JSON.stringify(inversiones));
+function guardarInversionesEnLS() {
+  localStorage.setItem("inversiones", JSON.stringify(inversiones))  
 }
+
+function traerInversionesDelLS() {
+return JSON.parse(localStorage.getItem("inversiones"))
+}
+
+function traerInversionesDelLSalInicio() {
+  const inversionesSesiónAnterior = traerInversionesDelLS();
+  if (inversionesSesiónAnterior) {
+    for (let i = 0; i < inversionesSesiónAnterior.length; i++) {
+      inversiones.push(inversionesSesiónAnterior[i])
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  traerInversionesDelLSalInicio()
+})
 
 let boton=document.getElementById("simularInversion")
 boton.addEventListener("click", (event) => {
@@ -88,96 +114,49 @@ boton.addEventListener("click", (event) => {
   let nombre = document.getElementById("nombre").value
   let capitalInicial = parseFloat(document.getElementById("capitalInicial").value)
   let plazo = parseInt(document.getElementById("plazo").value)
-  simularInversion(nombre, capitalInicial, plazo)
-  cargarInversionesEnLS()
-
+  simularInversion(nombre, capitalInicial, plazo) 
 })
 
-/*
-let resetBtn=document.getElementById("resetResultados")
+let resetBtn=document.getElementById("resetBtn")
 resetBtn.addEventListener("click", () => {
-  let form = document.getElementById("form")
-  form.reset()
+  localStorage.clear()
 })
-*/
 
-/*
+function mostrarResultadoBusqueda(resultado){
+  limpiarResultadoAnterior("sectionBus","resultadosBus")
+  const sectionBus=document.getElementById("sectionBus")
+  const divResultadosBus = document.createElement("div")
+  divResultadosBus.id="resultadosBus"
+  divResultadosBus.className="cajaResultadosBus"    
+  sectionBus.appendChild(divResultadosBus)
+  divResultadosBus.innerHTML = `
+    <p class="text-center">Resultado de la búsqueda:</p>
+    <ul class="listaResultados">
+      <li>Nombre: ${resultado.nombre}</li>
+      <li>Capital Inicial: $${resultado.capitalInicial}</li>
+      <li>Plazo: ${resultado.plazo} días</li>
+      <li>Tasa Nominal Anual: ${resultado.tasaNominalAnual}%</li>
+      <li>Capital final: $${resultado.capitalFinal.toFixed(2)}</li>
+    </ul>
+    `
+}
 
-function traerInversionesDelLS() {
-  const inversionesEnLS = localStorage.getItem("inversiones")
-  if (inversionesEnLS) {
-    inversiones = JSON.parse(inversionesEnLS)
+function validarNombreBus(buscarNombre){
+  let busquedaNombreError=document.getElementById("busquedaNombreError")
+  buscarNombre !== "" ? (busquedaNombreError.innerHTML = "") : (busquedaNombreError.innerHTML = "Completa este campo")
+}
+
+function buscarPorNombre() {
+  let buscarNombre = document.getElementById("buscarNombre").value
+  validarNombreBus(buscarNombre)
+  if (buscarNombre !== "") {
+  let resultado = traerInversionesDelLS().find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
+  mostrarResultadoBusqueda(resultado)  
   }
 }
 
-// Funciones de filtro y búsqueda 
-
-function buscarPorNombre(nombre) {
-  traerInversionesDelLS()
-  return inversiones.find((inversion) => inversion.nombre.toLowerCase() === nombre.toLowerCase())
-}
-
-function filtrarPorPlazo(plazo) {
-  traerInversionesDelLS()
-  return inversiones.filter((inversion) => inversion.plazo === plazo)
-}
-
-*/
-
-/*
-// Menú
-
-function menu() {
-  let opciones = parseInt(prompt("\n¿Qué acción desea realizar?: \n\n1. Simular una inversión\n2. Buscar inversiones por nombre\n3. Buscar inversiones por plazo\n4. Salir \n"));
-
-  switch (opciones) {
-    case 1:
-      simularInversion()
-      menu()
-      break
-    case 2:
-      let nombreBusqueda = prompt("Ingrese nombre para la búsqueda")
-      let inversionEncontrada = buscarPorNombre(nombreBusqueda)
-      if (inversionEncontrada) {
-        let mensaje= `Nombre: ${inversionEncontrada.nombre} \nCapital Inicial: $${inversionEncontrada.capitalInicial} \nPlazo: ${inversionEncontrada.plazo} \nTNA: ${inversionEncontrada.tasaNominalAnual}% \nCapital Final: $${inversionEncontrada.capitalFinal.toFixed(2)}`
-        alert(mensaje)
-      } else {
-        alert("No se encontraron inversiones con el nombre indicado.")
-      }
-      menu()
-      break
-    case 3:
-      let plazoBusqueda = parseInt(prompt("Ingrese el plazo para la búsqueda"))
-      let inversionesFiltradas = filtrarPorPlazo(plazoBusqueda)
-      if (inversionesFiltradas.length > 0) {
-        let listado = "Inversiones Encontradas: \n\n"
-        inversionesFiltradas.forEach(item => {
-          listado += `Nombre: ${item.nombre} \nCapital Inicial: $${item.capitalInicial}\nPlazo: ${item.plazo} días \nTNA: ${item.tasaNominalAnual}% \nCapital Final: $${item.capitalFinal.toFixed(2)}\n\n` 
-      })
-        alert(listado) 
-      } else {
-        alert("No se encontraron inversiones con el plazo indicado.")
-      }
-      menu()
-      break
-    case 4:
-      alert("\nGracias por elegirnos! \nTe esperamos nuevamente! :) \n\nSaludos!")
-      break
-    default:
-      alert("Ingresaste una opción inválida :( \n\n Probemos de nuevo!")
-      menu()
-  }
-}
-
-menu()
-
-
-
-
-
-
-
-
+let btnBusqueda=document.getElementById("btnBusquedaNombre")
+btnBusqueda.addEventListener("click", buscarPorNombre)
 
 
 

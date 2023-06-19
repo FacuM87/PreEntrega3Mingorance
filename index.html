@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1 class="text-center mt-5"> Simulador de Inversiones </h1>
-    <section id="section1" class="d-flex justify-content-evenly">
+    <section id="sectionSim" class="d-flex justify-content-center">
         <form id="form">
             <div class="d-flex flex-column">
                 <label for=""> Nombre </label>
@@ -27,26 +27,31 @@
             </div>
             <div class="btns d-flex justify-content-center">
                 <button id="simularInversion" class="btn btn-primary mt-4">Simular Inversión</button>
-                <button id="resetResultados" class="btn btn-primary mt-4">Reset</button>
+                <button id="resetBtn" class="btn btn-primary mt-4">Borrar Inversiones Guardadas</button>
             </div>
         </form>
-        <!-- <div id="resultados"></div> -->
     </section>
     <h2 class="text-center mt-5"> Búsqueda de Inversiones </h2>
-        <div class="busquedas d-flex">
-            <div class="d-flex flex-column">
-                <label for=""> Por nombre: </label>
-                <input id="nombre" class="" type="nombre" required placeholder="Ingrese el Nombre">
-                <button class="btn btn-primary mt-4"> Buscar por nombre </button> 
-                <div id="busquedaNombreError" class="form-text"></div>
+    <section id="sectionBus" class="d-flex justify-content-center">
+            <div class="busquedas d-flex">
+                <div class="d-flex flex-column">
+                    <label for=""> Nombre: </label> 
+                    <input id="buscarNombre" class="" type="nombre" placeholder="Ingrese el Nombre">
+                    <div id="busquedaNombreError" class="form-text"></div>
+                    <button id="btnBusquedaNombre" class="btn btn-primary mt-4"> Buscar </button> 
+                </div>
+                <!-- <div class="d-flex flex-column">
+                    <label for="" class=""> Por plazo (en días): </label>
+                    <input id="filtrarPlazo" type="number" placeholder="Ingrese el plazo">
+                    <div id="busquedaPlazoError" class="form-text"></div>
+                    <button id="btnFiltroPlazo" class="btn btn-primary mt-4"> Buscar por Plazo </button>
+                </div> -->
             </div>
-            <div class="d-flex flex-column">
-                <label for="" class=""> Por plazo (en días): </label>
-                <input id="plazo" type="number" required placeholder="Ingrese el plazo">
-                <button class="btn btn-primary mt-4"> Buscar por Plazo </button>
-                <div id="busquedaPlazoError" class="form-text"></div>
-            </div>
-        </div>
+    </section>
+    <h2 class="text-center mt-5"> Resumen de Inversiones Realizadas</h2>
+    <section>
+        
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
 </body>
