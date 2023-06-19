@@ -152,16 +152,31 @@ function mostrarResultadoBusqueda(resultado){
 }
 
 function validarNombreBus(buscarNombre){
-  let busquedaNombreError=document.getElementById("busquedaNombreError")
-  buscarNombre !== "" ? (busquedaNombreError.innerHTML = "") : (busquedaNombreError.innerHTML = "Completa este campo")
+  let busquedaNombreError = document.getElementById("busquedaNombreError")
+
+  if (buscarNombre === "") {
+    busquedaNombreError.innerHTML = "Completa este campo"
+    return false
+  }
+
+  //let inversiones = traerInversionesDelLS()
+
+  let verificarNombre = inversiones.find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase());
+
+  if (!verificarNombre) {
+    busquedaNombreError.innerHTML = "No contamos con inversiones bajo ese nombre."
+    return false
+  }
+
+  busquedaNombreError.innerHTML = ""
+  return true
 }
 
 function buscarPorNombre() {
   let buscarNombre = document.getElementById("buscarNombre").value
-  validarNombreBus(buscarNombre)
-  if (buscarNombre !== "") {
-  let resultado = traerInversionesDelLS().find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
-  mostrarResultadoBusqueda(resultado)  
+  if (validarNombreBus(buscarNombre)===true) {
+    let resultado = traerInversionesDelLS().find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
+    mostrarResultadoBusqueda(resultado)    
   }
 }
 
