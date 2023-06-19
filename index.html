@@ -14,7 +14,7 @@
             <h1> Simulador de Inversiones </h1>
         </div>
     </header>
-    <main class="d-flex">
+    <main class="d-flex justify-content-evenly">
         <section id="sectionSim" class="d-flex flex-column">
             <h2 class="text-center mt-4">Simulador</h2>
             <form id="form">
@@ -48,13 +48,16 @@
                     </div>
                 </div>
         </section>
-            <div class="d-flex flex-column">
-                <h2 class="text-center mt-4">Resumen de Simulaciones Realizadas</h2>
-                <button id="resumen" class="btnResumen btn btn-primary mt-4 mb-3 w-25">Ver Resumen</button>
-                <div id="resumenSimulaciones" class="d-flex"></div>
-            </div>
-        <section>
             
+        <section class="d-flex flex-column">
+            <h2 class="text-center mt-4">Simulaciones Guardadas</h2>
+            <div class="d-flex flex-column">
+                <div class="contResumen d-flex flex-column">
+                    <p class="text-center">Con esta funcionalidad podrás visualizar todas las simulaciones actualmente guardadas</p>
+                    <button id="resumen" class="btnResumen btn btn-primary mb-3 w-25">Ver Resumen</button>
+                </div>
+                <div id="resumenSimulaciones" class=""></div>
+            </div>
         </section>
     
     </main>
