@@ -125,8 +125,10 @@ boton.addEventListener("click", (event) => {
 })
 
 let resetBtn=document.getElementById("resetBtn")
-resetBtn.addEventListener("click", () => {
+resetBtn.addEventListener("click", (event) => {
+  event.preventDefault()
   localStorage.clear()
+  document.getElementById("reseteoLS").innerHTML="Las simulaciones han sido eliminadas"
 })
 
 function mostrarResultadoBusqueda(resultado){
@@ -183,7 +185,8 @@ btnBusqueda.addEventListener("click", buscarPorNombre)
 
 function eliminarInversion(){ 
   let nombreInversion = document.getElementById("buscarNombre").value
-  let index = inversiones.indexOf(inversion => inversion.nombre === nombreInversion)
+  let inversion=inversiones.find(inversion => inversion.nombre.toLowerCase() === nombreInversion.toLowerCase())
+  let index = inversiones.indexOf(inversion)
   inversiones.splice(index, 1)
   document.getElementById("confirmacionEliminacion").innerHTML="Registro eliminado correctamente"
   guardarInversionesEnLS()  

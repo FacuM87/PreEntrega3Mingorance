@@ -32,8 +32,13 @@
                     <div id="plazoError" class="form-text"></div>
                 </div>
                 <div class="btns d-flex justify-content-center">
-                    <button id="simularInversion" class="btn btn-primary mt-4">Simular Inversión</button>
-                    <button id="resetBtn" class="btn btn-primary mt-4">Borrar Inversiones Guardadas</button>
+                    <div>
+                        <button id="simularInversion" class="btn btn-primary mt-4">Simular Inversión</button>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <button id="resetBtn" class="btn btn-primary mt-4">Borrar Inversiones Guardadas</button>
+                        <div id="reseteoLS" class="form-text text-center"></div>
+                    </div>
                 </div>
             </form>
         </section>
@@ -54,7 +59,7 @@
             <div class="d-flex flex-column">
                 <div class="contResumen d-flex flex-column">
                     <p class="text-center">Con esta funcionalidad podrás visualizar todas las simulaciones actualmente guardadas</p>
-                    <button id="resumen" class="btnResumen btn btn-primary mb-3 w-25">Ver Resumen</button>
+                    <button id="resumen" class="btnResumen btn btn-primary mb-3 w-25">Ver Simulaciones</button>
                 </div>
                 <div id="resumenSimulaciones" class=""></div>
             </div>
