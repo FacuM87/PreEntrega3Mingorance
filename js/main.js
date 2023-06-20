@@ -1,6 +1,3 @@
-/*
-alert("Bienvenido/a a la versión mejorada del simulador de inversiones a plazo fijo! \n\nTras las mejoras incorporadas podrás realizar no solo una simulación, sino todas las que desees. Los resultados quedarán almacenados y luego podrás acceder a los mismos ya sea buscando por nombre o plazo. \n\nComencemos!")
-*/
 
 function limpiarResultadoAnterior(idSection, idDiv){
   const section = document.getElementById(idSection)
@@ -77,8 +74,8 @@ class Inversion {
   }
 }
 
-const inversiones = []
 
+const inversiones = []
 function simularInversion(nombre, capitalInicial, plazo){ 
   const inversion = new Inversion(nombre)
   inversion.validarNombre(nombre)
@@ -91,7 +88,6 @@ function simularInversion(nombre, capitalInicial, plazo){
     inversiones.push(inversion) 
     guardarInversionesEnLS() 
   }
-  console.log(inversiones)
 }
 
 function guardarInversionesEnLS() {
@@ -110,7 +106,6 @@ function traerInversionesDelLSalInicio() {
     }
   }
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   traerInversionesDelLSalInicio()
 })
@@ -130,6 +125,7 @@ resetBtn.addEventListener("click", (event) => {
   localStorage.clear()
   document.getElementById("reseteoLS").innerHTML="Las simulaciones han sido eliminadas"
 })
+
 
 function mostrarResultadoBusqueda(resultado){
   limpiarResultadoAnterior("sectionBus","resultadosBus")
@@ -159,7 +155,7 @@ function validarNombreBus(buscarNombre){
   if (buscarNombre === "") {
     busquedaNombreError.innerHTML = "Completa este campo"
     return false
-  }
+  } 
   
   let inversiones = traerInversionesDelLS()
   let verificarNombre = inversiones.find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
@@ -192,6 +188,7 @@ function eliminarInversion(){
   guardarInversionesEnLS()  
 }
 
+
 function resumenSimulaciones(){
   let inversionesResumen=traerInversionesDelLS()
   contenido=""
@@ -214,5 +211,3 @@ function resumenSimulaciones(){
 
 let btnResumen=document.getElementById("resumen")
 btnResumen.addEventListener("click", resumenSimulaciones)
-
-
