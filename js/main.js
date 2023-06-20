@@ -99,7 +99,7 @@ return JSON.parse(localStorage.getItem("inversiones"))
 }
 
 function traerInversionesDelLSalInicio() {
-  const inversionesSesiónAnterior = traerInversionesDelLS();
+  const inversionesSesiónAnterior = traerInversionesDelLS()
   if (inversionesSesiónAnterior) {
     for (let i = 0; i < inversionesSesiónAnterior.length; i++) {
       inversiones.push(inversionesSesiónAnterior[i])
