@@ -31,6 +31,8 @@ class Inversion {
   validarCapitalInicial(capitalInicial) {
     let montoError=document.getElementById("montoError")
     capitalInicial > 0 ? (montoError.innerHTML = "", this.capitalInicial = capitalInicial) : (montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?")
+
+    
   }
   
   validarPlazo(plazo) {

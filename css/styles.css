@@ -101,7 +101,17 @@ align-self: center;
     margin: 0 auto;
     overflow-x: scroll;
     width: 450px;  
-    height: fit-content;  
+    height: fit-content;
+    animation: SlideInSim .5s ease-out;  
+}
+
+@keyframes SlideInSim {
+    0%{
+        transform: translateY(-120px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }
 
 .cajasSimulaciones{
