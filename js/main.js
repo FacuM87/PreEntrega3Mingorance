@@ -112,8 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
   traerInversionesDelLSalInicio()
 })
 
-let boton=document.getElementById("simularInversion")
-boton.addEventListener("click", (event) => {
+let btnSimularInversion=document.getElementById("simularInversion")
+btnSimularInversion.addEventListener("click", (event) => {
   event.preventDefault()
   let nombre = document.getElementById("nombre").value
   let capitalInicial = parseFloat(document.getElementById("capitalInicial").value)
