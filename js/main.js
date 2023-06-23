@@ -30,9 +30,7 @@ class Inversion {
 
   validarCapitalInicial(capitalInicial) {
     let montoError=document.getElementById("montoError")
-    capitalInicial > 0 ? (montoError.innerHTML = "", this.capitalInicial = capitalInicial) : (montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?")
-
-    
+    capitalInicial > 0 ? (montoError.innerHTML = "", this.capitalInicial = capitalInicial) : (montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?")    
   }
   
   validarPlazo(plazo) {
@@ -78,6 +76,15 @@ class Inversion {
 
 
 const inversiones = []
+
+function guardarInversionesEnLS() {
+  localStorage.setItem("inversiones", JSON.stringify(inversiones))  
+}
+
+function traerInversionesDelLS() {
+  return JSON.parse(localStorage.getItem("inversiones"))
+}
+
 function simularInversion(nombre, capitalInicial, plazo){ 
   const inversion = new Inversion(nombre)
   inversion.validarNombre(nombre)
@@ -90,14 +97,6 @@ function simularInversion(nombre, capitalInicial, plazo){
     inversiones.push(inversion) 
     guardarInversionesEnLS() 
   }
-}
-
-function guardarInversionesEnLS() {
-  localStorage.setItem("inversiones", JSON.stringify(inversiones))  
-}
-
-function traerInversionesDelLS() {
-return JSON.parse(localStorage.getItem("inversiones"))
 }
 
 function traerInversionesDelLSalInicio() {
