@@ -80,10 +80,21 @@ const inversiones = []
 function guardarInversionesEnLS() {
   localStorage.setItem("inversiones", JSON.stringify(inversiones))  
 }
-
 function traerInversionesDelLS() {
   return JSON.parse(localStorage.getItem("inversiones"))
 }
+
+function traerInversionesDelLSalInicio() {
+  const inversionesSesiónAnterior = traerInversionesDelLS()
+  if (inversionesSesiónAnterior) {
+    for (let i = 0; i < inversionesSesiónAnterior.length; i++) {
+      inversiones.push(inversionesSesiónAnterior[i])
+    }
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  traerInversionesDelLSalInicio()
+})
 
 function simularInversion(nombre, capitalInicial, plazo){ 
   const inversion = new Inversion(nombre)
@@ -98,18 +109,6 @@ function simularInversion(nombre, capitalInicial, plazo){
     guardarInversionesEnLS() 
   }
 }
-
-function traerInversionesDelLSalInicio() {
-  const inversionesSesiónAnterior = traerInversionesDelLS()
-  if (inversionesSesiónAnterior) {
-    for (let i = 0; i < inversionesSesiónAnterior.length; i++) {
-      inversiones.push(inversionesSesiónAnterior[i])
-    }
-  }
-}
-document.addEventListener("DOMContentLoaded", () => {
-  traerInversionesDelLSalInicio()
-})
 
 let btnSimularInversion=document.getElementById("simularInversion")
 btnSimularInversion.addEventListener("click", (event) => {
@@ -127,6 +126,15 @@ resetBtn.addEventListener("click", (event) => {
   document.getElementById("reseteoLS").innerHTML="Las simulaciones han sido eliminadas"
 })
 
+
+function eliminarInversion(){ 
+  let nombreInversion = document.getElementById("buscarNombre").value
+  let inversion=inversiones.find(inversion => inversion.nombre.toLowerCase() === nombreInversion.toLowerCase())
+  let index = inversiones.indexOf(inversion)
+  inversiones.splice(index, 1)
+  document.getElementById("confirmacionEliminacion").innerHTML="Registro eliminado correctamente"
+  guardarInversionesEnLS()  
+}
 
 function mostrarResultadoBusqueda(resultado){
   limpiarResultadoAnterior("sectionBus","resultadosBus")
@@ -179,15 +187,6 @@ function buscarPorNombre() {
 
 let btnBusqueda=document.getElementById("btnBusquedaNombre")
 btnBusqueda.addEventListener("click", buscarPorNombre)
-
-function eliminarInversion(){ 
-  let nombreInversion = document.getElementById("buscarNombre").value
-  let inversion=inversiones.find(inversion => inversion.nombre.toLowerCase() === nombreInversion.toLowerCase())
-  let index = inversiones.indexOf(inversion)
-  inversiones.splice(index, 1)
-  document.getElementById("confirmacionEliminacion").innerHTML="Registro eliminado correctamente"
-  guardarInversionesEnLS()  
-}
 
 
 function resumenSimulaciones(){
