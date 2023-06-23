@@ -17,10 +17,10 @@ class Inversion {
   }
 
   validarNombre(nombre){
-    let nombreError=document.getElementById("nombreError")
+    const nombreError=document.getElementById("nombreError")
     nombre !== "" ? (nombreError.innerHTML = "") : (nombreError.innerHTML = "Completa este campo")
     
-    let inversionExistente = inversiones.find(inversion => inversion.nombre.toLowerCase() === nombre.toLowerCase())
+    const inversionExistente = inversiones.find(inversion => inversion.nombre.toLowerCase() === nombre.toLowerCase())
     inversionExistente && (nombreError.innerHTML = "Favor de ingresar un nombre no ingresado anteriormente.") 
 
     if (nombre === "" || inversionExistente) {
@@ -29,12 +29,12 @@ class Inversion {
   }
 
   validarCapitalInicial(capitalInicial) {
-    let montoError=document.getElementById("montoError")
+    const montoError=document.getElementById("montoError")
     capitalInicial > 0 ? (montoError.innerHTML = "", this.capitalInicial = capitalInicial) : (montoError.innerHTML = "¡Ups! Monto inválido, ¿probamos de nuevo?")    
   }
   
   validarPlazo(plazo) {
-    let plazoError=document.getElementById("plazoError")
+    const plazoError=document.getElementById("plazoError")
     plazo > 0 ? (plazoError.innerHTML = "", this.plazo=parseInt(plazo)) : (plazoError.innerHTML = "¡Ups! Plazo inválido, ¿probamos de nuevo?")
   }
 
@@ -113,9 +113,9 @@ function simularInversion(nombre, capitalInicial, plazo){
 let btnSimularInversion=document.getElementById("simularInversion")
 btnSimularInversion.addEventListener("click", (event) => {
   event.preventDefault()
-  let nombre = document.getElementById("nombre").value
-  let capitalInicial = parseFloat(document.getElementById("capitalInicial").value)
-  let plazo = parseInt(document.getElementById("plazo").value)
+  const nombre = document.getElementById("nombre").value
+  const capitalInicial = parseFloat(document.getElementById("capitalInicial").value)
+  const plazo = parseInt(document.getElementById("plazo").value)
   simularInversion(nombre, capitalInicial, plazo) 
 })
 
@@ -128,9 +128,9 @@ resetBtn.addEventListener("click", (event) => {
 
 
 function eliminarInversion(){ 
-  let nombreInversion = document.getElementById("buscarNombre").value
-  let inversion=inversiones.find(inversion => inversion.nombre.toLowerCase() === nombreInversion.toLowerCase())
-  let index = inversiones.indexOf(inversion)
+  const nombreInversion = document.getElementById("buscarNombre").value
+  const inversion=inversiones.find(inversion => inversion.nombre.toLowerCase() === nombreInversion.toLowerCase())
+  const index = inversiones.indexOf(inversion)
   inversiones.splice(index, 1)
   document.getElementById("confirmacionEliminacion").innerHTML="Registro eliminado correctamente"
   guardarInversionesEnLS()  
@@ -160,14 +160,14 @@ function mostrarResultadoBusqueda(resultado){
 }
 
 function validarNombreBus(buscarNombre){
-  let busquedaNombreError = document.getElementById("busquedaNombreError")
+  const busquedaNombreError = document.getElementById("busquedaNombreError")
   if (buscarNombre === "") {
     busquedaNombreError.innerHTML = "Completa este campo"
     return false
   } 
   
-  let inversiones = traerInversionesDelLS()
-  let verificarNombre = inversiones.find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
+  const inversiones = traerInversionesDelLS()
+  const verificarNombre = inversiones.find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
   if (!verificarNombre) {
     busquedaNombreError.innerHTML = "No contamos con inversiones bajo ese nombre."
     return false
@@ -178,9 +178,9 @@ function validarNombreBus(buscarNombre){
 }
 
 function buscarPorNombre() {
-  let buscarNombre = document.getElementById("buscarNombre").value
+  const buscarNombre = document.getElementById("buscarNombre").value
   if (validarNombreBus(buscarNombre)===true) {
-    let resultado = traerInversionesDelLS().find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
+    const resultado = traerInversionesDelLS().find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
     mostrarResultadoBusqueda(resultado)    
   }
 }
@@ -190,7 +190,7 @@ btnBusqueda.addEventListener("click", buscarPorNombre)
 
 
 function resumenSimulaciones(){
-  let inversionesResumen=traerInversionesDelLS()
+  const inversionesResumen=traerInversionesDelLS()
   contenido=""
   inversionesResumen.forEach(inversion => {
     contenido+= `
