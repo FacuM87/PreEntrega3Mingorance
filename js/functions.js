@@ -85,7 +85,7 @@ function mostrarResultadoBusqueda(resultado){
             )
           }
         })
-      })
+    })
 }
 
 function validarNombreBus(buscarNombre){
