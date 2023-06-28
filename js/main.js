@@ -84,8 +84,23 @@ btnSimularInversion.addEventListener("click", (event) => {
 let resetBtn=document.getElementById("resetBtn")
 resetBtn.addEventListener("click", (event) => {
   event.preventDefault()
-  localStorage.clear()
-  document.getElementById("reseteoLS").innerHTML="Las simulaciones han sido eliminadas"
+  Swal.fire({
+    title: '¿Desea eliminar las simulaciones almacenadas?',
+    text: "Esta acción no podrá ser revertida",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#0D6EFD',
+    cancelButtonColor: '#2F4F4F',
+    confirmButtonText: 'Sí, eliminar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.clear()
+      document.getElementById("reseteoLS").innerHTML="Las simulaciones han sido eliminadas"
+      Swal.fire(
+        'Las simulaciones fueron eliminadas!','','success'
+      )
+    }
+  })
 })
 
 let btnBusqueda=document.getElementById("btnBusquedaNombre")

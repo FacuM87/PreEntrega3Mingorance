@@ -67,7 +67,25 @@ function mostrarResultadoBusqueda(resultado){
       <div id="confirmacionEliminacion" class="form-text text-center"></div> 
       `
     let btnEliminacionRegistro=document.getElementById("btnEliminarInversion")
-    btnEliminacionRegistro.addEventListener("click", eliminarInversion)
+    btnEliminacionRegistro.addEventListener("click", (event) => {
+        event.preventDefault()
+        Swal.fire({
+          title: '¿Desea eliminar la simulación almacenada?',
+          text: "Esta acción no podrá ser revertida",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#0D6EFD',
+          cancelButtonColor: '#2F4F4F',
+          confirmButtonText: 'Sí, eliminar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            eliminarInversion()
+            Swal.fire(
+              'Las simulación fue eliminada!','','success'
+            )
+          }
+        })
+      })
 }
 
 function validarNombreBus(buscarNombre){
