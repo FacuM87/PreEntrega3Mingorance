@@ -100,6 +100,7 @@ resetBtn.addEventListener("click", (event) => {
       Swal.fire(
         'Las simulaciones fueron eliminadas!','','success'
       )
+      setTimeout(() => {location.reload()}, 1500)
     }
   })
 })

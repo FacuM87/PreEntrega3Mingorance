@@ -1,6 +1,6 @@
 
 let badlarReciente
-async function obtenerTasaBadlar(){
+async function obtenerTasaBadlar() {
     const respuesta=await fetch("https://api.estadisticasbcra.com/tasa_badlar",{
             headers:{ 
                 Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk0ODk2OTEsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJqaGpobGxAaG90bWFpbC5jb20ifQ.Mm6SIRl6hjDOyKAhxfEtfZhGuJ6UQC9HR1swWG2RDfHglVl330RVoiMuyz8O62Sf9tPzieLjVi_VIB927oiZvA"
