@@ -34,9 +34,9 @@ class Inversion {
     if (this.capitalInicial > 0 && this.capitalInicial < 500000) {
       this.tasaNominalAnual = 97
     } else if (this.capitalInicial >= 500000 && this.capitalInicial < 1000000) {
-      this.tasaNominalAnual = 107
+      this.tasaNominalAnual = 102
     } else if (this.capitalInicial >= 1000000) {
-      this.tasaNominalAnual = 117
+      this.tasaNominalAnual = badlarReciente
     }
   }
 
@@ -70,6 +70,7 @@ const inversiones = []
 
 document.addEventListener("DOMContentLoaded", () => {
   traerInversionesDelLSalInicio()
+  obtenerTasaBadlar()
 })
 
 let btnSimularInversion=document.getElementById("simularInversion")

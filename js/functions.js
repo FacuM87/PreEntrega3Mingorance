@@ -1,4 +1,17 @@
 
+let badlarReciente
+async function obtenerTasaBadlar(){
+    const respuesta=await fetch("https://api.estadisticasbcra.com/tasa_badlar",{
+            headers:{ 
+                Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk0ODk2OTEsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJqaGpobGxAaG90bWFpbC5jb20ifQ.Mm6SIRl6hjDOyKAhxfEtfZhGuJ6UQC9HR1swWG2RDfHglVl330RVoiMuyz8O62Sf9tPzieLjVi_VIB927oiZvA"
+              }
+        })
+    const datos = await respuesta.json()
+    console.log(datos)
+    badlarReciente=datos[datos.length-1].v
+    console.log(badlarReciente)
+} 
+
 function limpiarResultadoAnterior(idSection, idDiv){
     const section = document.getElementById(idSection)
     const div = document.getElementById(idDiv)
@@ -116,20 +129,22 @@ function buscarPorNombre() {
 
 function resumenSimulaciones(){
     const inversionesResumen=traerInversionesDelLS()
-    contenido=""
-    inversionesResumen.forEach(inversion => {
-      contenido+= `
-          <div class="cajasSimulaciones">
-            <p class="text-center">Simulación de ${inversion.nombre}</p>
-            <ul class="listaResultados">
-              <li>Capital Inicial: $${inversion.capitalInicial}</li>
-              <li>Plazo: ${inversion.plazo} días</li>
-              <li>Tasa Nominal Anual: ${inversion.tasaNominalAnual}%</li>
-              <li>Capital final: $${inversion.capitalFinal.toFixed(2)}</li>
-            </ul>
-          </div>
-         `
-    })
-    document.getElementById("resumenSimulaciones").classList.add("contenedorSimulaciones")
-    document.getElementById("resumenSimulaciones").innerHTML=contenido
+    let contenido=""
+    if (inversionesResumen) {
+        inversionesResumen.forEach(inversion => {
+        contenido+= `
+            <div class="cajasSimulaciones">
+                <p class="text-center">Simulación de ${inversion.nombre}</p>
+                <ul class="listaResultados">
+                <li>Capital Inicial: $${inversion.capitalInicial}</li>
+                <li>Plazo: ${inversion.plazo} días</li>
+                <li>Tasa Nominal Anual: ${inversion.tasaNominalAnual}%</li>
+                <li>Capital final: $${inversion.capitalFinal.toFixed(2)}</li>
+                </ul>
+            </div>`    
+        })
+        document.getElementById("simulacionesError").innerHTML=""
+        document.getElementById("resumenSimulaciones").classList.add("contenedorSimulaciones")
+        document.getElementById("resumenSimulaciones").innerHTML=contenido
+        } else {document.getElementById("simulacionesError").innerHTML="No hay simulaciones almacenadas"}
 }
