@@ -104,15 +104,14 @@ function mostrarResultadoBusqueda(resultado){
 function validarNombreBus(buscarNombre){
     const busquedaNombreError = document.getElementById("busquedaNombreError")
     if (buscarNombre === "") {
-      busquedaNombreError.innerHTML = "Completa este campo"
-      return false
+        busquedaNombreError.innerHTML = "Completa este campo"
+        return false
     } 
     
-    const inversiones = traerInversionesDelLS()
     const verificarNombre = inversiones.find(inversion => inversion.nombre.toLowerCase() === buscarNombre.toLowerCase())
-    if (!verificarNombre) {
-      busquedaNombreError.innerHTML = "No contamos con inversiones bajo ese nombre."
-      return false
+    if (!verificarNombre || verificarNombre==undefined) {
+        busquedaNombreError.innerHTML = "No contamos con inversiones bajo ese nombre."
+        return false
     }
   
     busquedaNombreError.innerHTML = ""
