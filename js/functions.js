@@ -58,9 +58,7 @@ function simularInversion(nombre, capitalInicial, plazo){
       inversiones.push(inversion) 
       guardarInversionesEnLS()
       inversion.mostrarResultados()
-    }
-    
-    
+    }    
 }
 
 function eliminarInversion(){ 
