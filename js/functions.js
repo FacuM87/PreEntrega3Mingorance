@@ -102,7 +102,7 @@ function mostrarResultadoBusqueda(resultado){
           if (result.isConfirmed) {
             eliminarInversion()
             Swal.fire(
-              'Las simulación fue eliminada!','','success'
+              'La simulación fue eliminada!','','success'
             )
           }
         })
@@ -143,10 +143,10 @@ function resumenSimulaciones(){
             <div class="cajasSimulaciones">
                 <p class="text-center">Simulación de ${inversion.nombre}</p>
                 <ul class="listaResultados">
-                <li>Capital Inicial: $${inversion.capitalInicial}</li>
-                <li>Plazo: ${inversion.plazo} días</li>
-                <li>Tasa Nominal Anual: ${inversion.tasaNominalAnual}%</li>
-                <li>Capital final: $${inversion.capitalFinal.toFixed(2)}</li>
+                  <li>Capital Inicial: $${inversion.capitalInicial}</li>
+                  <li>Plazo: ${inversion.plazo} días</li>
+                  <li>Tasa Nominal Anual: ${inversion.tasaNominalAnual}%</li>
+                  <li>Capital final: $${inversion.capitalFinal.toFixed(2)}</li>
                 </ul>
             </div>`    
         })
