@@ -15,7 +15,6 @@ async function obtenerTasaBadlar() {
   } catch (error) {
     badlarReciente="API error"
   }
-
 } 
 
 function limpiarResultadoAnterior(idSection, idDiv){
