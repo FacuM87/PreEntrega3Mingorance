@@ -41,7 +41,7 @@ class Inversion {
   }
 
   calcularInteresSimple() {
-    const interesPeriodo = this.capitalInicial * (this.tasaNominalAnual / 100) * (this.plazo / 365);
+    const interesPeriodo = this.capitalInicial * (this.tasaNominalAnual / 100) * (this.plazo / 365)
     this.capitalFinal = parseFloat(this.capitalInicial + interesPeriodo)
   }
 
@@ -52,7 +52,20 @@ class Inversion {
     divResultados.id="resultados"
     divResultados.classList.add("cajaResultados")    
     sectionSim.appendChild(divResultados)
-    divResultados.innerHTML = `
+    if (this.capitalInicial>= 1000000 && badlarReciente=="API error") {
+      divResultados.innerHTML = `
+      <div>
+        <p class="text-center mb-2">Muchas gracias ${this.nombre}. <br> A continuación los resultados:</p>
+        <ul class="listaResultados">
+          <li>Capital Invertido: $${this.capitalInicial}</li>
+          <li>Plazo: ${this.plazo} días</li>
+          <li>Tasa Nominal Anual: ${this.tasaNominalAnual}</li>
+          <li>Capital final: API error, no es posible obtener Capital Final</li>
+        </ul>
+      </div>
+    `
+    } else {
+      divResultados.innerHTML = `
       <div>
         <p class="text-center mb-2">Muchas gracias ${this.nombre}. <br> A continuación los resultados:</p>
         <ul class="listaResultados">
@@ -63,6 +76,7 @@ class Inversion {
         </ul>
       </div>
     `
+    }
   }
 }
 
