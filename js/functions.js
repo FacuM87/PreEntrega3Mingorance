@@ -1,15 +1,21 @@
+const inversiones = []
 
 let badlarReciente
 async function obtenerTasaBadlar() {
+  try {
     const respuesta = await fetch("https://api.estadisticasbcra.com/tasa_badlar",{
-            headers:{ 
-                Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk2NjQ4NzUsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJmYWN1bmRvLm1pbmdvcmFuY2VAZ21haWwuY29tIn0.4IfWXpXWOpsHdbZtX2LB18IX7cFhYMfKZ_izAeEl9gmEqhs7ryKg_SS76zC6Nvp713-dehCROgkRnheJQ8zj4Q"
-              }
-            })
+      headers:{ 
+          Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk2NjQ4NzUsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJmYWN1bmRvLm1pbmdvcmFuY2VAZ21haWwuY29tIn0.4IfWXpXWOpsHdbZtX2LB18IX7cFhYMfKZ_izAeEl9gmEqhs7ryKg_SS76zC6Nvp713-dehCROgkRnheJQ8zj4Q"
+        }
+      })
     const datos = await respuesta.json()
     console.log(datos)
     badlarReciente=datos[datos.length-1].v
     console.log(badlarReciente)
+  } catch (error) {
+    badlarReciente="API error"
+  }
+
 } 
 
 function limpiarResultadoAnterior(idSection, idDiv){
@@ -37,6 +43,7 @@ function traerInversionesDelLSalInicio() {
     }
 }
   
+
 function simularInversion(nombre, capitalInicial, plazo){ 
     const inversion = new Inversion(nombre)
     inversion.validarNombre(nombre)

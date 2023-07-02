@@ -66,8 +66,6 @@ class Inversion {
   }
 }
 
-const inversiones = []
-
 document.addEventListener("DOMContentLoaded", () => {
   traerInversionesDelLSalInicio()
   obtenerTasaBadlar()
