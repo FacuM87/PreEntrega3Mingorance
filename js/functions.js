@@ -5,7 +5,7 @@ async function obtenerTasaBadlar() {
   try {
     const respuesta = await fetch("https://api.estadisticasbcra.com/tasa_badlar",{
       headers:{ 
-          Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk4NDk3NDMsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJrampraEBnbWFpbC5jb20ifQ.E0gSRk3el-Qq2QpjYiS2qurzdGLk3aQUZMdTPPYvkw1Jpn1GEyqnWvO9PRPKLNf7GjYIs3aC5YTTBzVDc8z9pA"
+          Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk4NDk3NDMsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJrampraEBnbWFpbC5jb20ifQ.E0gSRk3el-Qq2QpjYiS2qurzdGLk3aQUZMdTPPYvkw1Jpn1GEyqnWvO9PRPKLNf7GjYIs3aC5YTTBzVDc8z9pA."
         }
       })
     const datos = await respuesta.json()
@@ -58,7 +58,10 @@ function simularInversion(nombre, capitalInicial, plazo){
       inversiones.push(inversion) 
       guardarInversionesEnLS()
       inversion.mostrarResultados()
-    }    
+    }
+    if (capitalInicial>=1000000 && badlarReciente=="API error" && plazo > 0 && inversion.validarNombre(nombre)!=false) {
+      inversion.mostrarResultados()
+    }
 }
 
 function eliminarInversion(){ 
