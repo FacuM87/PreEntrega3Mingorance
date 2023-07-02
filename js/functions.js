@@ -49,15 +49,10 @@ function simularInversion(nombre, capitalInicial, plazo){
     inversion.validarPlazo(plazo)
     inversion.determinarTasaNominalAnual()
     inversion.calcularInteresSimple()
-    if (capitalInicial > 0 && capitalInicial<1000000 && plazo > 0 && inversion.validarNombre(nombre)!=false) { 
+    if ((capitalInicial > 0 || (capitalInicial>=1000000 && badlarReciente!="API error")) && plazo > 0 && inversion.validarNombre(nombre)!=false) { 
       inversiones.push(inversion) 
       guardarInversionesEnLS()
       inversion.mostrarResultados() 
-    }
-    if (capitalInicial>=1000000 && badlarReciente!="API error" && plazo > 0 && inversion.validarNombre(nombre)!=false) {
-      inversiones.push(inversion) 
-      guardarInversionesEnLS()
-      inversion.mostrarResultados()
     }
     if (capitalInicial>=1000000 && badlarReciente=="API error" && plazo > 0 && inversion.validarNombre(nombre)!=false) {
       inversion.mostrarResultados()
